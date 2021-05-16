@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <h1 class="text-center my-5">Activation de votre compte</h1>
+        <p>Bonjour, {{ firstName }},</p>
+        <p>vous avez récemment crée un compte sur MeetingRooms.</p>
+        <p>Pour l'activer, veuillez cliquer sur bouton ci-dessous ou cliquez sur l'adresse en bas de page.</p>
+        <a href="{{ absolute_url(path('activation', {'token': token}))  }}" class="text-center mt-5 mb-3"><button class="btn btn-dark">Activer mon compte</button></a>
+        <a href="{{ absolute_url(path('activation', {'token': token}))  }}" class="text-center small">{{ absolute_url(path('activation', {'token': token}))  }}</a>
+    </div>
+</div>
+</body>
+</html>

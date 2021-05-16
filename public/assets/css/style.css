@@ -1,0 +1,51 @@
+.myform{
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 1rem;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 1.1rem;
+    outline: 0;
+    max-width: 500px;
+}
+
+.mybtn{
+    border-radius:50px;
+}
+
+a, form a:visited{
+    text-decoration: none;
+    color: inherit;
+}
+
+.avatar {
+    max-width: 128px;
+    max-height: 128px;
+    border-radius: 50%;
+}
+
+.avatar-micro {
+    max-width: 20px;
+    max-height: 20px;
+}
+
+.avatar-mini{
+    max-width: 24px;
+    max-height: 24px;
+}
+
+.avatar-medium {
+    max-width: 64px;
+    max-height: 64px;
+}
+
+.avatar-maxi {
+    max-width: 256px;
+    max-height: 256px;
+}
