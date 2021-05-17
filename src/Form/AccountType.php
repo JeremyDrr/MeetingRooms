@@ -29,6 +29,16 @@ class AccountType extends ApplicationType
                     'class' => "form-control"
                 ]
             ]))
+            ->add('description', TextType::class, $this->getConfiguration("Description", "Entrez la description de votre rôle au sein d'UT1", [
+                'attr' => [
+                    'class' => "form-control"
+                ]
+            ]))
+            ->add('picture', TextType::class, $this->getConfiguration("Photo de profil", "Entrez l'adresse de la photo de profil", [
+                'attr' => [
+                    'class' => "form-control"
+                ]
+            ]))
         ;
     }
 

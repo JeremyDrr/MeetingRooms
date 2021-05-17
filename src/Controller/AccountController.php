@@ -80,6 +80,7 @@ class AccountController extends AbstractController
 
             //Génération du token de d'activation du compte
             $user->setActivationToken(md5(uniqid()));
+            $user->setResetToken(md5(uniqid()));
 
             $manager->persist($user);
             $manager->flush();
@@ -141,7 +142,7 @@ class AccountController extends AbstractController
         //Envoie un flash
         //TODO: Add flash
 
-        return $this->redirectToRoute('homepage');
+        return $this->redirectToRoute('reset_password', array('token' => $user->getResetToken()));
     }
 
     /**

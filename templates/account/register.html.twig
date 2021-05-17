@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription{% endblock %}
+{% block title %}Création d'un nouveau membre{% endblock %}
 
 {% block body %}
 
@@ -8,10 +8,10 @@
         <div class="row">
             <div class="col-md-5 my-5 mx-auto">
                 <div id="first">
-                    <div class="myform form ">
+                    <div class="myform form">
                         <div class="logo mb-3">
                             <div class="col-md-12 text-center">
-                                Inscription</h1>
+                                <h1>Création d'un nouveau membre</h1>
                                 {{ form_start(form) }}
                                 {% if not form.vars.valid %}
                                     <div class="alert alert-danger">
@@ -43,22 +43,9 @@
                             <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Inscription</button>
                             {{ form_end(form) }}
                         </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <p class="text-center"><a href="{{ path('account_login') }}" id="signin">Vous avez déjà un compte?</a></p>
-                            </div>
-                        </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
     </div>
-    </div>
-
-{% endblock %}
-
-{% block javascripts %}
-    <script src="https://www.google.com/recaptcha/api.js?render=6LeK9OoUAAAAAFhw28cydOB1xnhPighX4nU1K8Kt"></script>
 {% endblock %}
