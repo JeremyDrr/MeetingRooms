@@ -328,6 +328,7 @@ class AccountController extends AbstractController
             $password = $resetPassword->getPassword();
             $hash = $encoder->encodePassword($user, $password);
             $user->setHash($hash);
+            $user->setResetToken(null);
 
             $manager->persist($user);
             $manager->flush();
