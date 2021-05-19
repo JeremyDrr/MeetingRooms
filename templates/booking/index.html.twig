@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des réservations{% endblock %}
+
+{% block body %}
+    {% for resa in resas %}
+        <img src="{{ resa.user.picture }}" class="avatar avatar-medium" alt="">
+        <br>
+    {% endfor %}
+{% endblock %}

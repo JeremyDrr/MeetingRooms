@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation d'une salle de réunion{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 my-5 mx-auto">
+                <div class="myform form my-5">
+                    <div class="logo mb-3">
+                        <div class="col-md-12 text-center">
+                            <h1>Réservation d'une salle de réunion</h1>
+
+                            {{ form_start(form) }}
+                            {% if not form.vars.valid %}
+                                <div class="alert alert-danger">
+                                    {% for child in form.children %}
+                                        {% for error in child.vars.errors %}
+                                            {{ error.message }} <br>
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        {{form_label(form.room)}}
+                        {{form_widget(form.room)}}
+                    </div>
+
+
+                    <div class="form-group">
+                        {{form_label(form.startDate)}}
+                        {{form_widget(form.startDate)}}
+                    </div>
+
+                    <div class="form-group">
+                        {{form_label(form.endDate)}}
+                        {{form_widget(form.endDate)}}
+                    </div>
+
+
+                    <div class="form-group mb-4">
+                        <div class="form-check form-switch">
+                            {{form_label(form.recurrent)}}
+                            {{form_widget(form.recurrent)}}
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class=" btn btn-block mybtn btn-success tx-tfm">Réserver</button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

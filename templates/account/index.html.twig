@@ -27,6 +27,48 @@
         <hr class="my-5">
         <h2 class="my-5">Réservations de {{ user.fullName }}</h2>
 
-    </div>
+        {% if user.bookings | length > 0 %}
 
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Nom de la salle</th>
+                <th>A partir du</th>
+                <th>Jusqu'au</th>
+                {% if user is same as(app.user) %}
+                    <th></th>
+                {% endif %}
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for booking in user.bookings %}
+                <tr>
+                    <td>{{ booking.room.name }}</td>
+                    <td>{{ booking.startDate | date('d-M-Y h:m')}}</td>
+                    <td>{{ booking.endDate | date('d-M-Y h:m')}}</td>
+                    {% if app.user == booking.user %}
+                        <td>
+                            <a href="#" class="btn btn-primary">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                            <a href="#" class="btn btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+
+            {% else %}
+            <div class="alert alert-warning">
+                <p>{{ user.firstName }} n'a pas effectué de reservation pour l'instant</p>
+            </div>
+        {% endif %}
+
+
+    </div>
 {% endblock %}

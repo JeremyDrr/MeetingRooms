@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Booking;
 use App\Entity\Role;
 use App\Entity\Room;
 use App\Entity\User;
@@ -60,11 +61,24 @@ class AppFixtures extends Fixture
         }
 
         //Gestion des salles
-        for($i = 0; $i < 15; $i++){
+        $rooms = [];
+        for($i = 1; $i < 15; $i++){
             $room = new Room();
             $room->setName($faker->firstName);
 
             $manager->persist($room);
+            $rooms[] = $room;
+        }
+
+        //Gestion des réservations
+        for($i = 1; $i < 20; $i++){
+            $booking = new Booking();
+            $booking->setUser($users[mt_rand(0, count($users) -1)])
+                ->setRoom($rooms[mt_rand(0, count($rooms) -1)])
+                ->setStartDate($faker->dateTimeInInterval('-0 days', '+2 days'))
+                ->setEndDate($faker->dateTimeInInterval('-3 days', '+1 days'))
+                ->setRecurrent($faker->boolean(50));
+            $manager->persist($booking);
         }
 
         $manager->flush();
