@@ -24,6 +24,7 @@
                     <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="accountDropdownLink">
                         {% if is_granted('ROLE_ADMIN') %}
                             <a href="{{ path('account_register') }}" class="dropdown-item">Créer un compte</a>
+                            <a href="{{ path('rooms') }}" class="dropdown-item">Salles de réunion</a>
                             <div class="dropdown-divider"></div>
                         {% endif %}
                         <a href="{{ path('account_index') }}" class="dropdown-item">Mon compte</a>

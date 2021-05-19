@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Role;
+use App\Entity\Room;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -56,6 +57,14 @@ class AppFixtures extends Fixture
                 ->setPicture($picture);
             $manager->persist($user);
             $users[] = $user;
+        }
+
+        //Gestion des salles
+        for($i = 0; $i < 15; $i++){
+            $room = new Room();
+            $room->setName($faker->firstName);
+
+            $manager->persist($room);
         }
 
         $manager->flush();
