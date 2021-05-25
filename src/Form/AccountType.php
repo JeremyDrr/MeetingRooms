@@ -32,12 +32,15 @@ class AccountType extends ApplicationType
             ->add('description', TextType::class, $this->getConfiguration("Description", "Entrez la description de votre rôle au sein d'UT1", [
                 'attr' => [
                     'class' => "form-control"
-                ]
+                ],
+                'required'   => false,
             ]))
             ->add('picture', TextType::class, $this->getConfiguration("Photo de profil", "Entrez l'adresse de la photo de profil", [
                 'attr' => [
                     'class' => "form-control"
-                ]
+                ],
+                'required'   => false,
+                'empty_data' => '/assets/img/user.svg',
             ]))
         ;
     }

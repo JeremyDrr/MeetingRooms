@@ -8,6 +8,7 @@ use App\Form\RoomType;
 use App\Repository\BookingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,7 +58,11 @@ class BookingController extends AbstractController
 
     /**
      * @Route("/booking/edit/{id}", name="booking_edit")
-     * @IsGranted("ROLE_USER")
+     * @param Request $request
+     * @param Booking $booking
+     * @param EntityManagerInterface $manager
+     * @return Response
+     * @Security("is_granted('ROLE_ADMIN') or user === booking.getUser()", message="Vous ne pouvez pas éditer cet article")
      */
     public function edit(Request $request, Booking $booking,EntityManagerInterface $manager): Response
     {
@@ -79,7 +84,7 @@ class BookingController extends AbstractController
 
     /**
      * @Route("/booking/delete/{id}", name="booking_delete")
-     * @IsGranted("ROLE_USER")
+     * @Security("is_granted('ROLE_ADMIN') or user === booking.getUser()", message="Vous ne pouvez pas éditer cet article")
      */
     public function delete(Request $request, Booking $booking,EntityManagerInterface $manager): Response
     {

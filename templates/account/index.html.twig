@@ -45,8 +45,8 @@
             {% for booking in user.bookings %}
                 <tr>
                     <td>{{ booking.room.name }}</td>
-                    <td>{{ booking.startDate | date('d-M-Y h:m')}}</td>
-                    <td>{{ booking.endDate | date('d-M-Y h:m')}}</td>
+                    <td>{{ booking.startDate | date('d-M-Y h:i')}}</td>
+                    <td>{{ booking.endDate | date('d-M-Y h:i')}}</td>
                     {% if app.user == booking.user %}
                         <td>
                             <a href="{{ path('booking_edit' , {'id':booking.id}) }}" class="btn btn-primary">
