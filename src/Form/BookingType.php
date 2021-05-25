@@ -25,18 +25,28 @@ class BookingType extends ApplicationType
             ->add('startDate', DateTimeType::class, $this->getConfiguration("Date de début", "Sélectionnez la date de début", [
                 'attr' => [
                     'class' => "form-control",
-                ]
+                ],
+                'widget' => 'choice',
+                'years' => range(date('Y'), date('Y')),
+                'months' => range(date('m'), 12),
+                'days' => range(date('d'), 31),
             ]))
             ->add('endDate', DateTimeType::class, $this->getConfiguration("Date de fin", "Sélectionnez la date de fin", [
                 'attr' => [
                     'class' => "form-control",
-                ]
+                ],
+                'widget' => 'choice',
+                'years' => range(date('Y'), date('Y')),
+                'months' => range(date('m'), 12),
+                'days' => range(date('d'), 31),
             ]))
             ->add('recurrent', CheckboxType::class, $this->getConfiguration("Il s'agit d'une réunion récurrente", "", [
                 'attr' => [
-                    'class' => 'form-check-input'
+                    'class' => 'form-check-input',
+
 
                 ],
+                'required'   => false,
             ]))
 
         ;

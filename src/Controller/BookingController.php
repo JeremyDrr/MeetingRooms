@@ -35,7 +35,7 @@ class BookingController extends AbstractController
     public function add(Request $request, EntityManagerInterface $manager): Response
     {
 
-       $booking = new Booking();
+        $booking = new Booking();
 
         $form = $this->createForm(BookingType::class, $booking);
         $form->handleRequest($request);
@@ -53,5 +53,41 @@ class BookingController extends AbstractController
         return $this->render('booking/new.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/booking/edit/{id}", name="booking_edit")
+     * @IsGranted("ROLE_USER")
+     */
+    public function edit(Request $request, Booking $booking,EntityManagerInterface $manager): Response
+    {
+
+        $form = $this->createForm(BookingType::class, $booking);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($booking);
+            $manager->flush();
+
+            //TODO: Add flash
+            return $this->redirectToRoute('booking_index');
+        }
+        return $this->render('booking/edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/booking/delete/{id}", name="booking_delete")
+     * @IsGranted("ROLE_USER")
+     */
+    public function delete(Request $request, Booking $booking,EntityManagerInterface $manager): Response
+    {
+
+        $manager->remove($booking);
+        $manager->flush();
+
+        //TODO: Add flash
+        return $this->redirectToRoute('booking_index');
     }
 }

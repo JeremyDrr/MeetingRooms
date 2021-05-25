@@ -6,6 +6,7 @@ use App\Entity\Room;
 use App\Form\RoomType;
 use App\Repository\RoomRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +17,7 @@ class RoomController extends AbstractController
 
     /**
      * @Route("/rooms", name="rooms")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function index(RoomRepository $repo){
         $rooms = $repo->findAll();
@@ -27,6 +29,7 @@ class RoomController extends AbstractController
 
     /**
      * @Route("/rooms/new", name="rooms_new")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function add(Request $request, EntityManagerInterface $manager): Response
     {
@@ -50,6 +53,7 @@ class RoomController extends AbstractController
 
     /**
      * @Route("/rooms/edit/{id}", name="rooms_edit")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, Room $room, EntityManagerInterface $manager): Response
     {
@@ -72,6 +76,7 @@ class RoomController extends AbstractController
 
     /**
      * @Route("/rooms/delete/{id}", name="rooms_delete")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, Room $room, EntityManagerInterface $manager): Response
     {

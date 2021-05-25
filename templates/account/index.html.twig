@@ -49,10 +49,10 @@
                     <td>{{ booking.endDate | date('d-M-Y h:m')}}</td>
                     {% if app.user == booking.user %}
                         <td>
-                            <a href="#" class="btn btn-primary">
+                            <a href="{{ path('booking_edit' , {'id':booking.id}) }}" class="btn btn-primary">
                                 <i class="fa fa-pencil"></i>
                             </a>
-                            <a href="#" class="btn btn-danger">
+                            <a href="{{ path('booking_delete' , {'id':booking.id}) }}" class="btn btn-danger">
                                 <i class="fa fa-trash"></i>
                             </a>
                         </td>

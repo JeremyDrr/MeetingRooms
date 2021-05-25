@@ -3,8 +3,34 @@
 {% block title %}Liste des réservations{% endblock %}
 
 {% block body %}
-    {% for resa in resas %}
-        <img src="{{ resa.user.picture }}" class="avatar avatar-medium" alt="">
-        <br>
-    {% endfor %}
+    <div class="container">
+        <h1 class="my-5 text-center">Liste des réservations</h1>
+        <a href="{{ path('booking_new') }}" class="btn btn-success">
+            <i class="fa fa-plus"></i>
+            Nouvelle réservation
+        </a>
+        {% for resa in resas %}
+            <div class="row my-4">
+                <div class="col-9">
+                    <img src="{{ resa.user.picture }}" class="avatar avatar-medium" alt="">
+                    {{ resa.user.fullName }} a reservé la salle {{ resa.room.name }} le {{ resa.startDate | date('d/m/Y H:i') }} jusqu'au {{ resa.endDate | date('d/m/Y H:i')}}
+                </div>
+
+                {% if app.user == resa.user %}
+                    <div class="col-3">
+                        <a href="{{ path('booking_edit' , {'id':resa.id}) }}" class="btn btn-primary">
+                            <i class="fa fa-pencil"></i>
+                            Modifier
+                        </a>
+                        <a href="{{ path('booking_delete' , {'id':resa.id}) }}" class="btn btn-danger">
+                            <i class="fa fa-trash"></i>
+                            Supprimer
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
+
 {% endblock %}
