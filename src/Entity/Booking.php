@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=BookingRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Booking
 {
@@ -34,18 +35,19 @@ class Booking
     /**
      * @ORM\Column(type="datetime")
      */
-    private $StartDate;
+    private $startDate;
 
     /**
      * @ORM\Column(type="datetime")
      * @Assert\GreaterThan(propertyPath="startDate", message="La date de départ doit être plus éloignée que la date d'arrivée !")
      */
-    private $EndDate;
+    private $endDate;
 
     /**
      * @ORM\Column(type="boolean")
      */
     private $recurrent;
+
 
     public function getId(): ?int
     {
@@ -78,24 +80,24 @@ class Booking
 
     public function getStartDate(): ?\DateTimeInterface
     {
-        return $this->StartDate;
+        return $this->startDate;
     }
 
-    public function setStartDate(\DateTimeInterface $StartDate): self
+    public function setStartDate(\DateTimeInterface $startDate): self
     {
-        $this->StartDate = $StartDate;
+        $this->startDate = $startDate;
 
         return $this;
     }
 
     public function getEndDate(): ?\DateTimeInterface
     {
-        return $this->EndDate;
+        return $this->endDate;
     }
 
-    public function setEndDate(\DateTimeInterface $EndDate): self
+    public function setEndDate(\DateTimeInterface $endDate): self
     {
-        $this->EndDate = $EndDate;
+        $this->endDate = $endDate;
 
         return $this;
     }

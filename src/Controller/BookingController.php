@@ -45,11 +45,14 @@ class BookingController extends AbstractController
 
             $booking->setUser($this->getUser());
 
-            $manager->persist($booking);
-            $manager->flush();
+                if($booking->getRoom()->isAvailable($booking->get))
 
-            //TODO: Add flash
-            return $this->redirectToRoute('booking_index');
+                $manager->persist($booking);
+                $manager->flush();
+
+                //TODO: Add flash
+                return $this->redirectToRoute('booking_index');
+
         }
         return $this->render('booking/new.html.twig', [
             'form' => $form->createView(),

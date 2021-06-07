@@ -16,7 +16,7 @@
                     {{ resa.user.fullName }} a reservé la salle {{ resa.room.name }} le {{ resa.startDate | date('d/m/Y H:i') }} jusqu'au {{ resa.endDate | date('d/m/Y H:i')}}
                 </div>
 
-                {% if app.user == resa.user %}
+                {% if app.user == resa.user or is_granted('ROLE_ADMIN') %}
                     <div class="col-3">
                         <a href="{{ path('booking_edit' , {'id':resa.id}) }}" class="btn btn-primary">
                             <i class="fa fa-pencil"></i>

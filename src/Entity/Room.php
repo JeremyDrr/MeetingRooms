@@ -36,6 +36,24 @@ class Room
         $this->bookings = new ArrayCollection();
     }
 
+    /**
+     * Savoir si la salle dans le créneau demandé est déjà occupée
+     *
+     * @param \DateTime $check
+     * @return bool
+     */
+    public function isAvailable(\DateTime $check): bool
+    {
+        $res = true;
+
+        foreach ($this->bookings as $booking){
+            if($check > $booking->getStartDate() && $check < $booking->getEndDate()){
+               $res = false;
+            }
+        }
+        return $res;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
