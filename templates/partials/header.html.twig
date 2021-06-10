@@ -1,44 +1,44 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ path('homepage') }}">Meeting Rooms</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="ms-auto order-0">
+            <a class="navbar-brand mx-auto" href="{{ path('homepage') }}">Meeting Rooms</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('homepage') }}">Accueil</a>
                 </li>
                 {% if app.user %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('booking_index') }}">Réservation</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('booking_index') }}">Réservation</a>
+                    </li>
                 {% endif %}
             </ul>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
             <ul class="navbar-nav ms-auto">
                 {% if app.user %}
-                <li class="dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="accountDropdownLink">
-                        <img src="{{ app.user.picture }}" class="avatar avatar-mini" alt="{{ app.user.fullName }}'s avatar"> {{ app.user.fullName }}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="{{ app.user.picture }}" class="avatar avatar-micro" alt="{{ app.user.fullName }}'s avatar"> {{ app.user.fullName }}
                     </a>
-                    <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="accountDropdownLink">
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdown">
                         {% if is_granted('ROLE_ADMIN') %}
                             <a href="{{ path('account_register') }}" class="dropdown-item">Créer un compte</a>
                             <a href="{{ path('rooms') }}" class="dropdown-item">Salles de réunion</a>
                             <div class="dropdown-divider"></div>
+                            <a href="{{ path('account_index') }}" class="dropdown-item">Mon compte</a>
+                            <a href="{{ path('account_edit') }}" class="dropdown-item">Éditer mes informations</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="{{ path("account_logout") }}" class="dropdown-item">Se déconnecter</a>
                         {% endif %}
-                        <a href="{{ path('account_index') }}" class="dropdown-item">Mon compte</a>
-                        <a href="{{ path('account_edit') }}" class="dropdown-item">Éditer mes informations</a>
-                        <div class="dropdown-divider"></div>
-                        <a href="{{ path("account_logout") }}" class="dropdown-item">Se déconnecter</a>
-
-                    </div>
-
+                    </ul>
                 </li>
-                {% else %}
-                <li class="nav-item">
-                    <a href="{{ path('account_login') }}" class="nav-link">Se connecter</a>
-                </li>
+                    {% else %}
+                        <a href="{{ path('account_login') }}" class="nav-link">Se connecter</a>
                 {% endif %}
             </ul>
         </div>

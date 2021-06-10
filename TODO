@@ -1,7 +1,7 @@
-Au 25/05
+Au 10/06
 
 - CKEditor pour la description et la photo de profil
-- Suppression automatique des réservations passées
+- Suppression automatique journalière des réservations passées                              DONE
 - Booléen lors de la réservation                                                            DONE
 - Vérification validité des dates lors d'une réservation                                    DONE
 - Édition d'une réservation                                                                 DONE

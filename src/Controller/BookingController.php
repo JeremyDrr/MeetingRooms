@@ -19,7 +19,7 @@ class BookingController extends AbstractController
     /**
      * @Route("/booking", name="booking_index")
      */
-    public function index(BookingRepository $repository): Response
+    public function index(BookingRepository $repository, EntityManagerInterface $manager): Response
     {
 
         $resas = $repository->findAll();
@@ -45,8 +45,6 @@ class BookingController extends AbstractController
 
             $booking->setUser($this->getUser());
 
-                if($booking->getRoom()->isAvailable($booking->get))
-
                 $manager->persist($booking);
                 $manager->flush();
 
@@ -65,7 +63,7 @@ class BookingController extends AbstractController
      * @param Booking $booking
      * @param EntityManagerInterface $manager
      * @return Response
-     * @Security("is_granted('ROLE_ADMIN') or user === booking.getUser()", message="Vous ne pouvez pas éditer cet article")
+     * @Security("is_granted('ROLE_ADMIN') or user === booking.getUser()", message="Vous ne pouvez pas éditer cette résvervation")
      */
     public function edit(Request $request, Booking $booking,EntityManagerInterface $manager): Response
     {
@@ -87,7 +85,7 @@ class BookingController extends AbstractController
 
     /**
      * @Route("/booking/delete/{id}", name="booking_delete")
-     * @Security("is_granted('ROLE_ADMIN') or user === booking.getUser()", message="Vous ne pouvez pas éditer cet article")
+     * @Security("is_granted('ROLE_ADMIN') or user === booking.getUser()", message="Vous ne pouvez pas éditer cette réservation")
      */
     public function delete(Request $request, Booking $booking,EntityManagerInterface $manager): Response
     {

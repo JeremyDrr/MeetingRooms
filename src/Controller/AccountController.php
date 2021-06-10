@@ -85,21 +85,20 @@ class AccountController extends AbstractController
             $manager->persist($user);
             $manager->flush();
 
-    /**        //Création de l'email
+            /**        //Création de l'email
             $email = (new TemplatedEmail())
-                ->from('meetingrooms@ut-capitole.fr')
-                ->to($user->getEmail())
-                ->subject("Activation de votre compte MeetingRooms")
-                ->htmlTemplate("emails/activation.html.twig")
-                ->context([
-                    'firstName' => $user->getFirstName(),
-                    'token' => $user->getActivationToken()
-                ])
+            ->from('meetingrooms@ut-capitole.fr')
+            ->to($user->getEmail())
+            ->subject("Activation de votre compte MeetingRooms")
+            ->htmlTemplate("emails/activation.html.twig")
+            ->context([
+            'firstName' => $user->getFirstName(),
+            'token' => $user->getActivationToken()
+            ])
             ;
 
             $mailer->send($email);
-**/
-            //TODO: Add flash
+             **/
 
             return $this->redirectToRoute('account_login');
         }
@@ -272,23 +271,23 @@ class AccountController extends AbstractController
             // On génère l'URL de réinitialisation de mot de passe
             $url = $this->generateUrl('reset_password', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
 
- /**           // On génère l'e-mail
+            /**           // On génère l'e-mail
             $message = (new TemplatedEmail())
-                ->from('meetingrooms@ut-capitole.fr')
-                ->to($user->getEmail())
-                ->subject("Demande de réinitialisation de mot de passe")
-                ->htmlTemplate('emails/forgetpassword.html.twig')
-                ->context([
-                        'firstName' => $user->getFirstName(),
-                        'url' => $url,
-                        'token' => $user->getResetToken()
-                    ]
-                )
+            ->from('meetingrooms@ut-capitole.fr')
+            ->to($user->getEmail())
+            ->subject("Demande de réinitialisation de mot de passe")
+            ->htmlTemplate('emails/forgetpassword.html.twig')
+            ->context([
+            'firstName' => $user->getFirstName(),
+            'url' => $url,
+            'token' => $user->getResetToken()
+            ]
+            )
             ;
 
             // On envoie l'e-mail
             $mailer->send($message);
-**/
+             **/
             // On crée le message flash de confirmation
             //TODO: Add flash Email de réinitialisation envoyé
 
