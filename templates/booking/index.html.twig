@@ -2,6 +2,12 @@
 
 {% block title %}Liste des réservations{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.2/main.min.css" integrity="sha256-u40zn9KeZYpMjgYaxWJccb4HnP0i8XI17xkXrEklevE=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.css">
+{% endblock %}
+
 {% block body %}
     <div class="container">
         <h1 class="my-5 text-center">Liste des réservations</h1>
@@ -9,28 +15,40 @@
             <i class="fa fa-plus"></i>
             Nouvelle réservation
         </a>
-        {% for resa in resas %}
-            <div class="row my-4">
-                <div class="col-9">
-                    <img src="{{ resa.user.picture }}" class="avatar avatar-medium" alt="">
-                    {{ resa.user.fullName }} a reservé la salle {{ resa.room.name }} le {{ resa.startDate | date('d/m/Y H:i') }} jusqu'au {{ resa.endDate | date('d/m/Y H:i')}}
-                </div>
 
-                {% if app.user == resa.user or is_granted('ROLE_ADMIN') %}
-                    <div class="col-3">
-                        <a href="{{ path('booking_edit' , {'id':resa.id}) }}" class="btn btn-primary">
-                            <i class="fa fa-pencil"></i>
-                            Modifier
-                        </a>
-                        <a href="{{ path('booking_delete' , {'id':resa.id}) }}" class="btn btn-danger">
-                            <i class="fa fa-trash"></i>
-                            Supprimer
-                        </a>
-                    </div>
-                {% endif %}
-            </div>
-            <hr>
-        {% endfor %}
+        <div id="calendrier" class="mt-5"></div>
+
     </div>
+{% endblock %}
 
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.2/main.min.js" integrity="sha256-yirUYbNvdsLHfZcQDyDMB51pfQ0Mn8siGDZOvtBgCFw=" crossorigin="anonymous"></script>
+    <script>
+        window.onload = () => {
+            let calendarElt = document.querySelector("#calendrier")
+            let calendar = new FullCalendar.Calendar(calendarElt, {
+                themeSystem: 'bootstrap',
+                bootstrapFontAwesome: true,
+                initialView: 'dayGridMonth',
+                locale: 'fr',
+                buttonText: {
+                    today:    'Aujourd\'hui',
+                    month:    'Mois',
+                    week:     'Semaine',
+                    day:      'Jour',
+                    list:     'Liste',
+                    allday:   'Toute la journée'
+                },
+                timeZone: 'Europe/Paris',
+                headerToolbar: {
+                    start: 'prev,next today',
+                    center: 'title',
+                    end: 'dayGridMonth,timeGridWeek,listMonth'
+                },
+                nowIndicator: true,
+                events: {{ data | raw }}
+            })
+            calendar.render()
+        }
+    </script>
 {% endblock %}

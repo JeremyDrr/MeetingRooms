@@ -1,9 +1,11 @@
-Au 10/06
+Au 11/06
 
-- CKEditor pour la description et la photo de profil
+- CKEditor pour la description et la photo de profil                                        (??)
 - Suppression automatique journalière des réservations passées                              DONE
 - Booléen lors de la réservation                                                            DONE
 - Vérification validité des dates lors d'une réservation                                    DONE
 - Édition d'une réservation                                                                 DONE
 - Suppression d'une réservation                                                             DONE
-- THE GOOGLE CALENDAR DE SES MORTS AKA THE DEVIL ITSELF I STG, SCREW THIIIIIIIIS
+- THE GOOGLE CALENDAR DE SES MORTS AKA THE DEVIL ITSELF I STG, SCREW THIIIIIIIIS            DONE
+- Incrémentation du slug si le prénom et le nom de famille sont les mêmes
+- Fix footer (sticky position)

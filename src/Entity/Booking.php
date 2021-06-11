@@ -48,6 +48,11 @@ class Booking
      */
     private $recurrent;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $title;
+
 
     public function getId(): ?int
     {
@@ -110,6 +115,18 @@ class Booking
     public function setRecurrent(bool $recurrent): self
     {
         $this->recurrent = $recurrent;
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
 
         return $this;
     }

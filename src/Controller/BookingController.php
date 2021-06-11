@@ -24,9 +24,24 @@ class BookingController extends AbstractController
 
         $resas = $repository->findAll();
 
-        return $this->render('booking/index.html.twig', [
-            'resas' => $resas,
-        ]);
+        $rdvs = [];
+
+        foreach($resas as $event){
+            $rdvs[] = [
+                'id' => $event->getId(),
+                'start' => $event->getStartDate()->format('Y-m-d H:i:s'),
+                'end' => $event->getEndDate()->format('Y-m-d H:i:s'),
+                'title' => $event->getTitle()
+            ];
+        }
+
+        $data = json_encode($rdvs);
+
+        return $this->render('booking/index.html.twig',
+                compact('data')
+
+
+        );
     }
 
     /**
