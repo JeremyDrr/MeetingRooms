@@ -46,8 +46,24 @@
                     end: 'dayGridMonth,timeGridWeek,listMonth'
                 },
                 nowIndicator: true,
-                events: {{ data | raw }}
+                events: {{ data | raw }},
+                editable: true,
+                eventResizableFromStart: true
             })
+
+            calendar.on('eventChange', (e) => {
+                let url = `/api/${e.event.id}/edit`
+                let donnees = {
+                    "title": e.event.title,
+                    "startDate": e.event.startDate,
+                    "endDate": e.event.endDate,
+                }
+
+                let xhr = new XMLHttpRequest
+                xhr.open("PUT", url)
+                xhr.send(JSON.stringify(donnees))
+            })
+
             calendar.render()
         }
     </script>

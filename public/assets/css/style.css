@@ -49,3 +49,69 @@ a, form a:visited{
     max-width: 256px;
     max-height: 256px;
 }
+
+/**
+
+
+ */
+
+* {
+    box-sizing: border-box;
+}
+
+.video-container {
+    position: relative;
+}
+
+video{
+    height: auto;
+    vertical-align: middle;
+    width: 100%;
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+}
+
+.overlay-desc {
+    background: rgba(0,0,0,0);
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay-desc > h1{
+    color: white;
+    font-family: 'Nobile', sans-serif;
+    font-size: 3em;
+    text-align: center;
+}
+
+.overlay-desc > img{
+    position:absolute;
+    margin: 0 auto;
+    width: 200px;
+    padding-bottom: 350px;
+}
+
+::-webkit-scrollbar{
+    width: 5px;
+    background-color: #EEEEEE;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #3498DB;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #3498DB;
+    border: 1px solid #3498DB;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background-color: #3498DB;
+    border: 1px solid #3498DB;
+}
