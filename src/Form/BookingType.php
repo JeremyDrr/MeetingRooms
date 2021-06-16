@@ -43,7 +43,7 @@ class BookingType extends ApplicationType
                 'months' => range(date('m'), 12),
                 'days' => range(date('d'), 31),
             ]))
-            ->add('recurrent', CheckboxType::class, $this->getConfiguration("Il s'agit d'une réunion récurrente", "", [
+            ->add('recurrent', CheckboxType::class, $this->getConfiguration("Réserver pour la semaine suivante", "", [
                 'attr' => [
                     'class' => 'form-check-input',
 

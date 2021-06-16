@@ -8,6 +8,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
+
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
@@ -31,12 +32,14 @@
                         {% if is_granted('ROLE_ADMIN') %}
                             <a href="{{ path('account_register') }}" class="dropdown-item">Créer un compte</a>
                             <a href="{{ path('rooms') }}" class="dropdown-item">Salles de réunion</a>
+                            <a href="{{ path('booking_list') }}" class="dropdown-item">Gérer les réservations</a>
                             <div class="dropdown-divider"></div>
+                        {% endif %}
                             <a href="{{ path('account_index') }}" class="dropdown-item">Mon compte</a>
                             <a href="{{ path('account_edit') }}" class="dropdown-item">Éditer mes informations</a>
                             <div class="dropdown-divider"></div>
                             <a href="{{ path("account_logout") }}" class="dropdown-item">Se déconnecter</a>
-                        {% endif %}
+
                     </ul>
                 </li>
                     {% else %}

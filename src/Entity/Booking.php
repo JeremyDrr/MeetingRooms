@@ -34,6 +34,7 @@ class Booking
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\GreaterThan("today", message="La date de réservation doit être supérieur ou égale à celle d'aujourd'hui")
      */
     private $startDate;
 

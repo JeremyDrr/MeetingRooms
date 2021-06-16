@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des réservations{% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <h1 class="my-5 text-center">Gestion des réservations</h1>
+
+        {% if resas | length == 0 %}
+            <div class="alert alert-warning my-5">
+                <h4>Oops! 🤨</h4>
+                <p>Il n'y a pas de réservation en cours en ce moment...</p>
+                <small>Revenez plus tard!</small>
+            </div>
+        {% endif %}
+
+
+        {% for resa in resas %}
+
+            <div class="row mb-4">
+                <div class="col-9">
+                    <img src="{{ resa.user.picture }}" class="avatar avatar-medium" alt="Photo de profil de {{ resa.user.fullName }}">
+                    <strong>{{ resa.user.fullName }}</strong> a réservé la salle <strong>{{ resa.room.name }}</strong> à partir du <strong>{{ resa.startDate | date('j/m/Y h:i') }}</strong>
+                    jusqu'au <strong>{{ resa.endDate | date('j/m/Y h:i') }}</strong>
+                </div>
+                <div class="col-3">
+
+                    <a href="{{ path('booking_edit', {'id' : resa.id }) }}" class="btn btn-primary">
+                        <i class="fa fa-pencil"></i>
+                        Modifier
+                    </a>
+
+                    <a href="{{ path('booking_delete', {'id' : resa.id }) }}" class="btn btn-danger">
+                        <i class="fa fa-trash"></i>
+                        Supprimer
+                    </a>
+
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
+{% endblock %}

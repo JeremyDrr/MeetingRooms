@@ -16,6 +16,8 @@
             <tr>
                 <th>Id</th>
                 <th>Nom</th>
+                <th>Nombre de sièges</th>
+                <th>Vidéoprojecteur</th>
                 <th></th>
             </tr>
             </thead>
@@ -24,6 +26,8 @@
                 <tr>
                     <td>{{ room.id }}</td>
                     <td>{{ room.name }}</td>
+                    <td>{{ room.seats }}</td>
+                    <td>{{ room.hasProjector }}</td>
                     <td>
                         <a href="{{ path('rooms_edit', {'id':room.id}) }}" class="btn btn-primary">
                             <i class="fa fa-pencil"></i>

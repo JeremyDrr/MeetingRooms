@@ -64,7 +64,9 @@ class AppFixtures extends Fixture
         $rooms = [];
         for($i = 1; $i < 15; $i++){
             $room = new Room();
-            $room->setName($faker->firstName);
+            $room->setName('M'. strtoupper($faker->randomLetter) .$faker->randomDigit)
+            ->setSeats($faker->randomDigitNotNull)
+            ->setHasProjector($faker->boolean);
 
             $manager->persist($room);
             $rooms[] = $room;
@@ -74,6 +76,7 @@ class AppFixtures extends Fixture
         for($i = 1; $i < 20; $i++){
             $booking = new Booking();
             $booking->setUser($users[mt_rand(0, count($users) -1)])
+                ->setTitle($faker->sentence)
                 ->setRoom($rooms[mt_rand(0, count($rooms) -1)])
                 ->setStartDate($faker->dateTimeInInterval('-0 days', '+2 days'))
                 ->setEndDate($faker->dateTimeInInterval('-3 days', '+1 days'))

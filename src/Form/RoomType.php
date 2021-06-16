@@ -3,6 +3,9 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,6 +19,21 @@ class RoomType extends ApplicationType
                 'attr' => [
                     'class' => "form-control"
                 ]
+            ]))
+            ->add('seats', IntegerType::class, $this->getConfiguration("Nombre de sièges", "Entrez le nombre de sièges", [
+                'attr' => [
+                    'class' => "form-control",
+                    'min' => 1,
+                    'max' => 100
+                ]
+            ]))
+            ->add('hasProjector', CheckboxType::class, $this->getConfiguration("Vidéoprojecteur disponible", "", [
+                'attr' => [
+                    'class' => 'form-check-input',
+
+
+                ],
+                'required'   => false,
             ]))
         ;
     }

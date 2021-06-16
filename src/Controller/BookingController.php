@@ -6,6 +6,7 @@ use App\Entity\Booking;
 use App\Form\BookingType;
 use App\Form\RoomType;
 use App\Repository\BookingRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -45,6 +46,23 @@ class BookingController extends AbstractController
     }
 
     /**
+     * @Route("/booking/list", name="booking_list")
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function list(BookingRepository $repository): Response
+    {
+
+        $resas = $repository->findAll();
+
+
+
+        return $this->render('booking/list.html.twig', [
+            'resas' => $resas
+            ]
+        );
+    }
+
+    /**
      * @Route("/booking/new", name="booking_new")
      * @IsGranted("ROLE_USER")
      */
@@ -59,6 +77,22 @@ class BookingController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $booking->setUser($this->getUser());
+
+            if($booking->getRecurrent() == true){
+                $nextBooking = new Booking();
+
+                $startD = $booking->getStartDate()->format('d-m-Y h:i');
+                $endD = $booking->getEndDate()->format('d-m-Y h:i');
+
+                $nextBooking->setTitle($booking->getTitle() . " - Pré-réservé")
+                    ->setRoom($booking->getRoom())
+                    ->setStartDate((new DateTime($startD))->modify('+7 days'))
+                    ->setEndDate((new DateTime($endD))->modify('+7 days'))
+                    ->setUser($this->getUser())
+                    ->setRecurrent(false);
+
+                $manager->persist($nextBooking);
+            }
 
                 $manager->persist($booking);
                 $manager->flush();
@@ -91,7 +125,8 @@ class BookingController extends AbstractController
             $manager->flush();
 
             //TODO: Add flash
-            return $this->redirectToRoute('booking_index');
+            $referer = $request->headers->get('referer');
+            return $this->redirect($referer);
         }
         return $this->render('booking/edit.html.twig', [
             'form' => $form->createView(),
@@ -109,6 +144,7 @@ class BookingController extends AbstractController
         $manager->flush();
 
         //TODO: Add flash
-        return $this->redirectToRoute('booking_index');
+        $referer = $request->headers->get('referer');
+        return $this->redirect($referer);
     }
 }

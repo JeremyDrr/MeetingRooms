@@ -31,6 +31,16 @@ class Room
      */
     private $bookings;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $seats;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $hasProjector;
+
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
@@ -97,6 +107,30 @@ class Room
                 $booking->setRoom(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSeats(): ?int
+    {
+        return $this->seats;
+    }
+
+    public function setSeats(int $seats): self
+    {
+        $this->seats = $seats;
+
+        return $this;
+    }
+
+    public function getHasProjector(): ?bool
+    {
+        return $this->hasProjector;
+    }
+
+    public function setHasProjector(bool $hasProjector): self
+    {
+        $this->hasProjector = $hasProjector;
 
         return $this;
     }
