@@ -78,6 +78,12 @@ class BookingController extends AbstractController
 
             $booking->setUser($this->getUser());
 
+            if($form->get('room')->getData()->isAvailable($form->get('startDate')->getData(), $form->get('endDate')->getData()) == false){
+                $this->redirectToRoute('homepage');
+            }else{
+                $this->redirectToRoute('account_index');
+            }
+
             if($booking->getRecurrent() == true){
                 $nextBooking = new Booking();
 
@@ -93,6 +99,8 @@ class BookingController extends AbstractController
 
                 $manager->persist($nextBooking);
             }
+
+
 
                 $manager->persist($booking);
                 $manager->flush();

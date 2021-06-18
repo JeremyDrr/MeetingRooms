@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=BookingRepository::class)
+ * @UniqueEntity(fields={"startDate"}, message="Une réservation commence déjà à cette heure-ci")
  * @ORM\HasLifecycleCallbacks()
  */
 class Booking

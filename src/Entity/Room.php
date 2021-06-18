@@ -49,18 +49,18 @@ class Room
     /**
      * Savoir si la salle dans le créneau demandé est déjà occupée
      *
-     * @param \DateTime $check
-     * @return bool
      */
-    public function isAvailable(\DateTime $check): bool
+    public function isAvailable(\DateTimeInterface $checkin, \DateTimeInterface $checkout): bool
     {
         $res = true;
 
         foreach ($this->bookings as $booking){
-            if($check > $booking->getStartDate() && $check < $booking->getEndDate()){
-               $res = false;
+
+            if($checkin >= $booking->getStartDate() && $checkout <= $booking->getEndDate()){
+                return false;
             }
         }
+
         return $res;
     }
 
